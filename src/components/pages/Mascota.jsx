@@ -282,6 +282,8 @@ export function Mascotas() {
             } else if (mode === 'update') {
                 const response = await axiosClient.put(`/mascotas/actualizar/${idMascota.id_mascota}`, formData);
                 if (response.status === 200) {
+                    console.log('Estos son los datosrecibidos ', response);
+                    
                     Swal.fire({
                         position: "center", // Posición centrada
                         icon: "success",

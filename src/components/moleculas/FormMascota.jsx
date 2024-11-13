@@ -25,8 +25,8 @@ const FormMascotas = ({ mode, handleSubmit, onClose, actionLabel }) => {
   const [tamano, setTamano] = useState("");
   const [peso, setPeso] = useState("");
   const [sexo, setSexo] = useState("");
-  const [fotos, setFotos] = useState([]); 
-  const [nuevasFotos, setNuevasFotos] = useState([]); 
+  const [fotos, setFotos] = useState([null, null, null, null]);
+  const [nuevasFotos, setNuevasFotos] = useState([]);
   const fileInputRef = useRef(null);
   const { idMascota } = useContext(MascotasContext);
 
@@ -112,11 +112,32 @@ const FormMascotas = ({ mode, handleSubmit, onClose, actionLabel }) => {
     setSexo(idMascota.sexo || "");
 
     const imagenesArray = idMascota.imagenes
-      ? idMascota.imagenes.split(",").map((imagen) => `http://localhost:9227/uploads/${imagen}`)
-      : [];
-    setFotos(imagenesArray);
+    ? idMascota.imagenes.split(",").map((img) => `${axiosClient.defaults.baseURL}/uploads/${img}`)
+    : [];
+  const updatedImages = [null, null, null, null];
+  imagenesArray.forEach((img, idx) => {
+    if (idx < 4) updatedImages[idx] = { uri: img };
+  });
+  setFotos(updatedImages);
   }
 }, [mode, idMascota]);
+
+const handleImageChange = (index) => {
+  fileInputRef.current.click();
+  fileInputRef.current.onchange = (event) => {
+    const newImage = event.target.files[0];
+    if (newImage) {
+      const updatedImages = [...fotos];
+      updatedImages[index] = { uri: URL.createObjectURL(newImage) };
+      setNuevasFotos((prev) => {
+        const updatedNewImages = [...prev];
+        updatedNewImages[index] = newImage;
+        return updatedNewImages;
+      });
+      setFotos(updatedImages);
+    }
+  };
+};
 
 // Manejo del envío del formulario
 const handleFormSubmit = async (e) => {
@@ -163,28 +184,40 @@ const handleFormSubmit = async (e) => {
   });
   
 
-  nuevasFotos.forEach((imagen) => {
-    formData.append("imagenes", imagen);
-  });
+    // Adjuntar imágenes nuevas al formulario
+    nuevasFotos.forEach((imagen) => {
+      if (imagen) formData.append("imagenes", imagen);
+    });
+    
 
   handleSubmit(formData, e);
 };
 
   return (
     <form method="post" onSubmit={handleFormSubmit} encType="multipart/form-data">
-      <div className="flex flex-row items-center mt-48 mb-12 justify-center">
+      <div className="flex flex-row items-center mt-64 mb-12 justify-center">
         <AvatarGroup isBordered max={4} size={20} className="gap-1">
           {fotos.map((imagen, index) => (
-            <Avatar key={`existing-${index}`} showFallback size={80} className="w-24 h-24 cursor-pointer mb-4" src={imagen} />
-          ))}
-          {nuevasFotos.map((imagen, index) => (
-            <Avatar key={`new-${index}`} showFallback size={80} className="w-24 h-24 cursor-pointer mb-4" src={URL.createObjectURL(imagen)} />
-          ))}
-          {[...Array(4 - fotos.length - nuevasFotos.length)].map((_, index) => (
-            <Avatar size="xl" key={`empty-${index}`} showFallback className="w-24 h-24 cursor-pointer mb-4" onClick={() => fileInputRef.current.click()} />
+            <div key={`image-${index}`} className="image-wrapper">
+              <Avatar
+                showFallback
+                size="lg"
+                src={imagen ? imagen.uri : null}
+                className="w-24 h-24 cursor-pointer mb-4"
+                onClick={() => handleImageChange(index)}
+              />
+              {!imagen && (
+                <span className="text-gray-500 text-xs">Agregar Imagen</span>
+              )}
+            </div>
           ))}
         </AvatarGroup>
-        <input type="file" name="imagenes" accept="image/*" ref={fileInputRef} style={{ display: "none" }} onChange={(e) => setNuevasFotos([...nuevasFotos, ...Array.from(e.target.files)])} multiple />
+        <input
+          type="file"
+          ref={fileInputRef}
+          style={{ display: "none" }}
+          accept="image/*"
+        />
         {errors.imagenes && <p className="text-red-500 text-xs ml-5 mt-1">{errors.imagenes}</p>}
       </div>
       
