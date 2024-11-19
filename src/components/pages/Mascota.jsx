@@ -280,6 +280,10 @@ export function Mascotas() {
                     alert('Error en el registro');
                 }
             } else if (mode === 'update') {
+                for (let [key, value] of formData.entries()) {
+                    console.log(`${key}: ${value}`);
+                }
+                
                 const response = await axiosClient.put(`/mascotas/actualizar/${idMascota.id_mascota}`, formData);
                 if (response.status === 200) {
                     console.log('Estos son los datosrecibidos ', response);

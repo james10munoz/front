@@ -289,11 +289,12 @@ function ListMascota({ initialData, onClose }) {
             {/* Botones */}
             {/* Botones */}
             <div className="flex justify-end mt-2">
-                <Button color="danger" onClick={onClose}>Cancelar</Button>
-                {user && (user.rol === 'superusuario' || user.rol !== 'superusuario') && initialData.estado !== 'Reservado' && initialData.estado !== 'Adoptado' && (
-                    <Button color="primary" onClick={handleAdoptar}>Adoptar</Button>
-                )}
-            </div>
+    <Button color="danger" onClick={onClose}>Cancelar</Button>
+    {user && user.rol !== 'superusuario' && initialData.estado !== 'Reservado' && initialData.estado !== 'Adoptado' && (
+        <Button color="primary" onClick={handleAdoptar}>Adoptar</Button>
+    )}
+</div>
+
             </>
             )}
         </div>
