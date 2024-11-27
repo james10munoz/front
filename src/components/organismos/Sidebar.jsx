@@ -68,11 +68,11 @@ export const Sidebar = () => {
   const renderMenu = () => {
     if (!user) return GuestMenu;
     switch (user.rol) {
-      case 'superusuario':
+      case "superusuario":
         return Menus;
-      case 'administrador':
+      case "administrador":
         return MenusAdmin;
-      case 'usuario':
+      case "usuario":
         return MenusUser;
       default:
         return GuestMenu;
@@ -82,16 +82,22 @@ export const Sidebar = () => {
   return (
     <div className="flex min-h-screen z-20">
       {sidebar && (
-        <div className={`${open ? "w-56" : "w-20"} bg-gradient-to-b text-white max-h-full p-5 pt-5 h-full fixed duration-300`}>
+        <div
+          className={`${open ? "w-56" : "w-20"} bg-gradient-to-b text-white max-h-full p-5 pt-5 h-full fixed duration-300`}
+        >
           <img
             src={Control}
-            className={`absolute cursor-pointer -right-3 mt-11 w-7 border-dark-purple border-2 rounded-full ${!open && "rotate-180"}`}
+            className={`absolute cursor-pointer -right-3 mt-11 w-7 border-dark-purple border-2 rounded-full ${
+              !open && "rotate-180"
+            }`}
             onClick={() => setOpen(!open)}
           />
           <div className="flex items-center">
             <img
               src={logo}
-              className={`cursor-pointer duration-500 h-10 w-10 rounded-full ${open ? "rotate-[360deg] w-40 h-20 rounded-full" : ""}`}
+              className={`cursor-pointer duration-500 h-10 w-10 rounded-full ${
+                open ? "rotate-[360deg] w-40 h-20 rounded-full" : ""
+              }`}
             />
           </div>
           <ul className="pt-6">
@@ -100,7 +106,9 @@ export const Sidebar = () => {
                 to={Menu.link}
                 key={index}
                 onClick={() => setActiveLink(Menu.link)}
-                className={`flex rounded-md p-2 cursor-pointer text-lg font-bold items-center gap-x-4 ${activeLink === Menu.link ? "border-2 border-[#EAEDF6]" : ""} ${customHoverEffects[Menu.title]} ${!open && "justify-center"}`}
+                className={`flex rounded-md p-2 cursor-pointer text-lg font-bold items-center gap-x-4 ${
+                  activeLink === Menu.link ? "border-2 border-[#EAEDF6]" : ""
+                } ${customHoverEffects[Menu.title]} ${!open && "justify-center"}`}
               >
                 <div>{React.createElement(Menu.icon, { size: "20" })}</div>
                 <span className={`${!open && "hidden"} origin-left duration-200`}>
