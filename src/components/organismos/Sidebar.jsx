@@ -54,7 +54,7 @@ export const Sidebar = () => {
   const GuestMenu = [
     { title: "Lista Mascotas", link: "/listmascotas", icon: MdOutlinePets },
   ];
-
+ 
   // Efectos personalizados para hover en cada opción del menú
   const customHoverEffects = {
     Usuarios: "hover:bg-gradient-to-r from-purple-500 to-pink-500 hover:shadow-lg",
