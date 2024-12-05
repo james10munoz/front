@@ -412,7 +412,7 @@ function Usuarios() {
 
         <>
             <Header title="Usuarios" />
-            <div className='w-full max-w-[90%] mt-16 ml-24 items-center p-10'>
+            <div className='w-full max-w-[90%] mt-16 ml-12 ? ml-40 items-center p-10'>
                 <AccionesModal
                     isOpen={modalAcciones}
                     onClose={() => setModalAcciones(false)}

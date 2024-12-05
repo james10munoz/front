@@ -3,16 +3,18 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineUser, AiOutlineBell, AiOutlinePieChart } from "react-icons/ai";
 import { FaUsers } from "react-icons/fa";
 import { MdOutlinePets } from "react-icons/md";
-import Control from './../../assets/control.png';
-import logo from './../../assets/logo.png';
+import Control from "./../../assets/control.png";
+import logo from "./../../assets/logo.png";
 
 export const Sidebar = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(
+    JSON.parse(localStorage.getItem("sidebarOpen")) ?? false
+  );
   const location = useLocation();
   const [activeLink, setActiveLink] = useState(location.pathname);
   const [sidebar, setSidebar] = useState(false);
 
-  const stored = localStorage.getItem('user');
+  const stored = localStorage.getItem("user");
   const user = stored ? JSON.parse(stored) : null;
 
   // Manejar la visibilidad del sidebar en función del tamaño de la ventana
@@ -54,8 +56,7 @@ export const Sidebar = () => {
   const GuestMenu = [
     { title: "Lista Mascotas", link: "/listmascotas", icon: MdOutlinePets },
   ];
- 
-  // Efectos personalizados para hover en cada opción del menú
+
   const customHoverEffects = {
     Usuarios: "hover:bg-gradient-to-r from-purple-500 to-pink-500 hover:shadow-lg",
     Mascotas: "hover:bg-gradient-to-r from-green-400 to-blue-500 hover:scale-105",
