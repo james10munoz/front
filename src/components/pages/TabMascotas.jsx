@@ -14,7 +14,7 @@ const TabMascotas = () => {
             <Header title="Datos Mascotas" />
             <div className='bg-[#EAEDF6] flex flex-col items-center'>
                 <div className='w-full max-w-[95%] p-6 flex-grow'>
-                    <div className="flex flex-col gap-6 w-full h-full bg-[#EAEDF6] pl-16">
+                    <div className="flex flex-col gap-6 w-full h-full bg-[#EAEDF6] pl-52">
                         <Tabs aria-label="Options" color="default" variant="bordered">
                             <Tab key="mascotas" title="Mascotas">
                                 <Card className="h-full">

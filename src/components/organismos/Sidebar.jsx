@@ -4,7 +4,7 @@ import { AiOutlineUser, AiOutlineBell, AiOutlinePieChart } from "react-icons/ai"
 import { FaUsers } from "react-icons/fa";
 import { MdOutlinePets } from "react-icons/md";
 import Control from "./../../assets/control.png";
-import logo from "./../../assets/logo.png";
+import logo from "./../../assets/logo.png";       
 
 export const Sidebar = () => {
   const [open, setOpen] = useState(
@@ -12,7 +12,7 @@ export const Sidebar = () => {
   );
   const location = useLocation();
   const [activeLink, setActiveLink] = useState(location.pathname);
-  const [sidebar, setSidebar] = useState(false);
+  const [sidebar, setSidebar] = useState(false);  // Controla el sidebar en pantallas pequeñas
 
   const stored = localStorage.getItem("user");
   const user = stored ? JSON.parse(stored) : null;
@@ -20,7 +20,7 @@ export const Sidebar = () => {
   // Manejar la visibilidad del sidebar en función del tamaño de la ventana
   useEffect(() => {
     const handleResize = () => {
-      setSidebar(window.innerWidth >= 768);
+      setSidebar(window.innerWidth >= 768);  // Mostrar el sidebar solo en pantallas grandes
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -80,46 +80,49 @@ export const Sidebar = () => {
     }
   };
 
+  const toggleSidebar = () => setOpen(!open);
+
   return (
-    <div className="flex min-h-screen z-20">
-      {sidebar && (
-        <div
-          className={`${open ? "w-56" : "w-20"} bg-gradient-to-b text-white max-h-full p-5 pt-5 h-full fixed duration-300`}
-        >
-          <img
-            src={Control}
-            className={`absolute cursor-pointer -right-3 mt-11 w-7 border-dark-purple border-2 rounded-full ${
-              !open && "rotate-180"
-            }`}
-            onClick={() => setOpen(!open)}
-          />
-          <div className="flex items-center">
-            <img
-              src={logo}
-              className={`cursor-pointer duration-500 h-10 w-10 rounded-full ${
-                open ? "rotate-[360deg] w-40 h-20 rounded-full" : ""
-              }`}
-            />
-          </div>
-          <ul className="pt-6">
-            {renderMenu().map((Menu, index) => (
-              <Link
-                to={Menu.link}
-                key={index}
-                onClick={() => setActiveLink(Menu.link)}
-                className={`flex rounded-md p-2 cursor-pointer text-lg font-bold items-center gap-x-4 ${
-                  activeLink === Menu.link ? "border-2 border-[#EAEDF6]" : ""
-                } ${customHoverEffects[Menu.title]} ${!open && "justify-center"}`}
-              >
-                <div>{React.createElement(Menu.icon, { size: "20" })}</div>
-                <span className={`${!open && "hidden"} origin-left duration-200`}>
-                  {Menu.title}
-                </span>
-              </Link>
-            ))}
-          </ul>
-        </div>
-      )}
+    <div
+      className={`${
+        open ? "w-56" : "w-20"
+      } bg-gradient-to-b from-gray-900 to-gray-900 text-white min-h-screen p-5 fixed left-0 top-0 transition-all duration-300`}
+    >
+      {/* Botón de control */}
+      {/* <img
+        src={Control}
+        alt="Control"
+        className={`absolute cursor-pointer -right-3 top-10 w-7 border-dark-purple border-2 rounded-full ${
+          !open && "rotate-180"
+        }`}
+        onClick={toggleSidebar}
+      /> */}
+      <div className="flex items-center">
+        <img
+          src={logo}
+          alt="Logo"
+          className={`cursor-pointer duration-500 h-10 w-10 rounded-full ${
+            open ? "w-40 h-20 rounded-full" : ""
+          }`}
+        />
+      </div>
+      <ul className="pt-6">
+        {Menus.map((Menu, index) => (
+          <Link
+            to={Menu.link}
+            key={index}
+            onClick={() => setActiveLink(Menu.link)}
+            className={`flex rounded-md p-2 cursor-pointer text-lg font-bold items-center gap-x-4 ${
+              activeLink === Menu.link ? "bg-gray-700" : ""
+            } ${customHoverEffects[Menu.title]} ${!open && "justify-center"}`}
+          >
+            <div>{React.createElement(Menu.icon, { size: "20" })}</div>
+            <span className={`${!open && "hidden"} origin-left duration-200`}>
+              {Menu.title}
+            </span>
+          </Link>
+        ))}
+      </ul>
     </div>
   );
 };

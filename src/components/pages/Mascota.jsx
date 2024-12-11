@@ -177,8 +177,8 @@ export function Mascotas() {
         }, [isLoaded]);
 
         return (
-            <div className="flex flex-col items-center p-4 w-full">
-                <div className="w-full sm:w-full lg:w-11/12 xl:w-11/12">
+            <div className="flex flex-col items-center p-4 w-full overflow-x-auto">
+                <div className="w-full sm:w-full lg:w-11/12 xl:w-11/12 ">
                     <div className="flex flex-col mt-3">
                         <div className="flex justify-between gap-3 items-end">
                             <Input

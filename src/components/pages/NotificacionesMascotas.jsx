@@ -93,7 +93,7 @@ const NotificacionesAdopciones = () => {
                     <p className="text-sm text-gray-700"><strong>Teléfono:</strong> {mascota.usuario_telefono}</p>
                 </CardHeader>
                 <CardBody className="overflow-visible py-2">
-                    <Skeleton isLoaded={isLoaded} className="rounded-lg">
+                    {/* <Skeleton isLoaded={isLoaded} className="rounded-lg">
                         <div className="relative w-full h-52 mb-4 overflow-hidden">
                             {mascota && mascota.imagenes ? (
                                 <div className={`grid ${mascota.imagenes.split(',').length === 1 ? 'grid-cols-1' : 'grid-cols-2'} gap-2`}>
@@ -119,7 +119,7 @@ const NotificacionesAdopciones = () => {
                                 />
                             )}
                         </div>
-                    </Skeleton>
+                    </Skeleton> */}
                     <p className="text-sm text-gray-700 font-medium mb-4">{mascota.descripcion}</p>
 
                     {/* Botones de acción solo para el superusuario */}

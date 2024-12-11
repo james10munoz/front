@@ -27,7 +27,7 @@ const TabNotificaciones = () => {
         <div className='bg-[#EAEDF6] min-h-screen mt-20 h-full'>
             <Header title="Notificaciones" />
             <div className='bg-[#EAEDF6] flex flex-col items-center'>
-                <div className='w-full max-w-[95%] p-6 flex-grow'>
+                <div className='w-full max-w-[95%] p-6 flex-grow pl-52'>
                     <div className="flex flex-col gap-6 w-full h-full bg-[#EAEDF6] pl-10">
                         <Tabs aria-label="Options" variant="bordered">
                             {tabs.map(tab => (

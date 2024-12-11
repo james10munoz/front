@@ -16,6 +16,8 @@ import TabNotificaciones from "./components/pages/TabNotificaciones";
 import PerfilUsuario from "./components/pages/Perfil";
 import Reportes from "./components/pages/Reportes";
 import ModoInvitado from "./components/templates/ModoInvitado";
+import { Sidebar } from "./components/organismos/Sidebar";
+// import { SidebarProvider } from "./context/SidebarContext";
 
 function App() {
   const stored = localStorage.getItem("user");
@@ -24,6 +26,8 @@ function App() {
   return (
     <BrowserRouter>
       <GlobalProvider>
+        <Sidebar/>
+        {/* <SidebarProvider> */}
         <Routes>
           <Route path="/" element={<Inicio />} />
           <Route path="/iniciosesion" element={<IniciarSesion />} />
@@ -92,6 +96,7 @@ function App() {
             </>
           )}
         </Routes>
+        {/* </SidebarProvider> */}
       </GlobalProvider>
     </BrowserRouter>
   );

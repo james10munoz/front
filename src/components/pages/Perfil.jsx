@@ -120,7 +120,7 @@ const PerfilUsuario = () => {
     <>
       <Header title="Perfil" />
       {perfil && (
-        <div className='my-12 mt-28 flex flex-col items-center'>
+        <div className='my-12 mt-28 flex flex-col items-center pl-52'>
           
           <div className="flex flex-col md:flex-row items-center bg-white shadow-md rounded-lg p-6 w-full max-w-4xl border border-gray-200">
             

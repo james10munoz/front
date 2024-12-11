@@ -4,23 +4,15 @@ import AccionesModal from '../organismos/ModalAcciones.jsx';
 import Swal from 'sweetalert2';
 import axiosClient from '../axiosClient.js';
 import UsuariosContext from '../../context/UsuariosContext.jsx';
-import {
-    Table,
-    TableHeader,
-    TableColumn,
-    TableBody,
-    TableRow,
-    TableCell,
-    Input,
-    Dropdown,
-    Pagination,
-} from "@nextui-org/react";
+import {Table,TableHeader,TableColumn,TableBody,TableRow,TableCell,Input,Dropdown,Pagination,} from "@nextui-org/react";
 import { Button } from "@nextui-org/button";
 import { PlusIcon } from "./../nextUI/PlusIcon.jsx";
 import { SearchIcon } from "./../nextUI/SearchIcon.jsx";
 import { EditIcon } from "../nextUI/EditIcon";
 import { DeleteIcon } from "../nextUI/DeleteIcon";
 import Header from '../moleculas/Header.jsx';
+// import { Sidebar } from "../organismos/Sidebar.jsx";
+import SidebarContext from "../../context/SidebarContext";
 
 function Usuarios() {
 
@@ -262,7 +254,9 @@ function Usuarios() {
         );
     }
 
-
+    const [isSidebarOpen, setIsSidebarOpen] = useState(
+        JSON.parse(localStorage.getItem("sidebarOpen")) ?? true
+      );
     const [modalOpen, setModalOpen] = useState(false);
     const [modalAcciones, setModalAcciones] = useState(false);
     const [mode, setMode] = useState('create');
@@ -272,8 +266,19 @@ function Usuarios() {
     const { idUsuario, setUsuarioId } = useContext(UsuariosContext)
 
     useEffect(() => {
-        peticionGet()
-    }, []);
+        localStorage.setItem("sidebarOpen", JSON.stringify(isSidebarOpen));
+    }, [isSidebarOpen]);
+    
+    useEffect(() => {
+        // Recupera el estado del sidebar desde localStorage
+        const storedState = localStorage.getItem("sidebarOpen");
+        if (storedState) {
+          setIsSidebarOpen(JSON.parse(storedState));
+        }
+    
+        // Petición para obtener usuarios
+        peticionGet();
+      }, []);
 
     const peticionGet = async () => {
         try {
@@ -408,16 +413,29 @@ function Usuarios() {
         setModalOpen(true)
         setMode(mode)
     }
+
+    // Puedes definir una función para manejar la apertura y cierre del Sidebar aquí
+    // const handleSidebarToggle = () => {
+    //     setIsSidebarOpen(!isSidebarOpen);
+    // };
+    const handleSidebarToggle = () => {
+        setIsSidebarOpen((prevState) => !prevState);
+    };
+    
+
     return (
 
         <>
-            <Header title="Usuarios" />
-            <div className='w-full max-w-[90%] mt-16 ml-12 ? ml-40 items-center p-10'>
-                <AccionesModal
-                    isOpen={modalAcciones}
-                    onClose={() => setModalAcciones(false)}
-                    label={mensaje}
-                />
+    <div className="flex">
+      {/* Contenido Principal */}
+      <div
+        className={`flex-1 transition-all duration-300 ${
+          isSidebarOpen ? "ml-56" : "ml-20"
+        } mt-20 p-10`}
+      >
+
+            <Header title="Usuarios" isSidebarOpen={isSidebarOpen} onSidebarToggle={handleSidebarToggle} />
+                <AccionesModal isOpen={modalAcciones} onClose={() => setModalAcciones(false)} label={mensaje} />
                 <UsuarioModal
                     open={modalOpen}
                     onClose={() => setModalOpen(false)}
@@ -427,11 +445,8 @@ function Usuarios() {
                     handleSubmit={handleSubmit}
                     mode={mode}
                 />
-                <EjemploUsuario
-                    data={data}
-                    usuarios={usuarios}
-                />
-            </div>
+                <EjemploUsuario data={data} usuarios={usuarios} />
+            </div></div>
         </>
     )
 }
