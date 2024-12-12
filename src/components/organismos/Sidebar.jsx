@@ -4,7 +4,7 @@ import { AiOutlineUser, AiOutlineBell, AiOutlinePieChart } from "react-icons/ai"
 import { FaUsers } from "react-icons/fa";
 import { MdOutlinePets } from "react-icons/md";
 import Control from "./../../assets/control.png";
-import logo from "./../../assets/logo.png";
+import logo from "./../../assets/logo.png";       
 
 export const Sidebar = () => {
   const [open, setOpen] = useState(
@@ -12,7 +12,7 @@ export const Sidebar = () => {
   );
   const location = useLocation();
   const [activeLink, setActiveLink] = useState(location.pathname);
-  const [sidebar, setSidebar] = useState(false); // Controla el sidebar en pantallas pequeñas
+  const [sidebar, setSidebar] = useState(false);  // Controla el sidebar en pantallas pequeñas
 
   const stored = localStorage.getItem("user");
   const user = stored ? JSON.parse(stored) : null;
@@ -20,7 +20,7 @@ export const Sidebar = () => {
   // Manejar la visibilidad del sidebar en función del tamaño de la ventana
   useEffect(() => {
     const handleResize = () => {
-      setSidebar(window.innerWidth >= 768); // Mostrar el sidebar solo en pantallas grandes
+      setSidebar(window.innerWidth >= 768);  // Mostrar el sidebar solo en pantallas grandes
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -63,6 +63,7 @@ export const Sidebar = () => {
     Notificaciones: "hover:bg-gradient-to-r from-yellow-400 to-orange-500 hover:rotate-6",
     Gráficas: "hover:bg-gradient-to-r from-red-400 to-yellow-500 hover:skew-y-3",
     Perfil: "hover:bg-gradient-to-r from-indigo-400 to-purple-600 hover:-translate-x-2",
+    "Mis Mascotas": "hover:bg-gradient-to-r from-green-400 to-blue-500 hover:scale-105",
   };
 
   const renderMenu = () => {
@@ -87,6 +88,16 @@ export const Sidebar = () => {
         open ? "w-56" : "w-20"
       } bg-gradient-to-b from-gray-900 to-gray-900 text-white min-h-screen p-5 fixed left-0 top-0 transition-all duration-300`}
     >
+      {/* Botón de control */}
+      {/* <img
+        src={Control}
+        alt="Control"
+        className={`absolute cursor-pointer -right-3 top-10 w-7 border-dark-purple border-2 rounded-full ${
+          !open && "rotate-180"
+        }`}x
+        onClick={toggleSidebar}
+      /> */}
+
       <div className="flex items-center">
         <img
           src={logo}
@@ -97,7 +108,7 @@ export const Sidebar = () => {
         />
       </div>
       <ul className="pt-6">
-        {renderMenu().map((Menu, index) => (
+      {renderMenu().map((Menu, index) => (
           <Link
             to={Menu.link}
             key={index}
