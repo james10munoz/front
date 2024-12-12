@@ -97,6 +97,7 @@ export const Sidebar = () => {
         }`}
         onClick={toggleSidebar}
       /> */}
+      
       <div className="flex items-center">
         <img
           src={logo}
