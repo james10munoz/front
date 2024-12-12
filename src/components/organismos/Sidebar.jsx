@@ -84,9 +84,7 @@ export const Sidebar = () => {
 
   return (
     <div
-      className={`${
-        open ? "w-56" : "w-20"
-      } bg-gradient-to-b from-gray-900 to-gray-900 text-white min-h-screen p-5 fixed left-0 top-0 transition-all duration-300`}
+      className={`w-56 bg-gradient-to-b from-gray-900 to-gray-900 text-white min-h-screen p-5 fixed left-0 top-0 transition-all duration-300`}
     >
       {/* Botón de control */}
       {/* <img
