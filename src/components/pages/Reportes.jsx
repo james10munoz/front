@@ -20,7 +20,7 @@ const Reportes = () => {
       <Header title="Reportes de Mascotas" />
 
       {/* Diseño circular para los reportes */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-6xl w-full px-6 mt-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-6xl w-full px-6 mt-16 pl-52">
         
         {/* Botón circular: Reportes de Mascotas en Adopción */}
         <div className="flex flex-col items-center justify-center">

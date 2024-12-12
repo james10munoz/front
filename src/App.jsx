@@ -16,7 +16,7 @@ import TabNotificaciones from "./components/pages/TabNotificaciones";
 import PerfilUsuario from "./components/pages/Perfil";
 import Reportes from "./components/pages/Reportes";
 import ModoInvitado from "./components/templates/ModoInvitado";
-import { Sidebar } from "./components/organismos/Sidebar";
+// import { Sidebar } from "./components/organismos/Sidebar";
 // import { SidebarProvider } from "./context/SidebarContext";
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
   return (
     <BrowserRouter>
       <GlobalProvider>
-        <Sidebar/>
+        {/* <Sidebar/> */}
         {/* <SidebarProvider> */}
         <Routes>
           <Route path="/" element={<Inicio />} />

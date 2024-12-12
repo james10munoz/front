@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  // baseURL: "http://localhost:9227",
-  baseURL: "http://192.168.0.20:9227",
+  baseURL: "http://localhost:9227",
+  // baseURL: "http://192.168.0.20:9227",
   // baseURL: "https://buddypet-backend-production.up.railway.app"
 });
 

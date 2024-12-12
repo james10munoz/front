@@ -13,7 +13,7 @@ const TabMascotas = () => {
         <div className='bg-[#EAEDF6] min-h-screen mt-20 h-full'>
             <Header title="Datos Mascotas" />
             <div className='bg-[#EAEDF6] flex flex-col items-center'>
-                <div className='w-full max-w-[95%] p-6 flex-grow'>
+                <div className='w-full max-w-[100%] pl-6 pt-6 flex-grow'>
                     <div className="flex flex-col gap-6 w-full h-full bg-[#EAEDF6] pl-52">
                         <Tabs aria-label="Options" color="default" variant="bordered">
                             <Tab key="mascotas" title="Mascotas">

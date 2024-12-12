@@ -84,6 +84,27 @@ export function ListsMascotas() {
         peticionGet();
     };
 
+    const handleDownloadPDF = async (idMascota) => {
+        try {
+            const response = await axiosClient.get(`/mascotas/pdf/${idMascota}`, {
+                responseType: 'blob', // Asegura que el servidor devuelva un archivo
+            });
+    
+            // Crea un enlace temporal para descargar el archivo
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', `ficha_tecnica_${idMascota}.pdf`);
+            document.body.appendChild(link);
+            link.click();
+            link.parentNode.removeChild(link);
+        } catch (error) {
+            console.error("Error al descargar la ficha técnica:", error);
+            Swal.fire("Error", "No se pudo descargar la ficha técnica", "error");
+        }
+    };
+    
+
     const filteredItems = useMemo(() => {
         return mascotas.filter(mascota => {
             const matchesSearch = String(mascota.id_mascota).toLowerCase().includes(filterValue.toLowerCase()) ||
@@ -157,7 +178,7 @@ export function ListsMascotas() {
     return (
         <>
             <Header title="Lista de mascotas" />
-            <div className='pl-24'>
+            <div className='pl-60 pt-6 p-6'>
                 <AccionesModal
                     isOpen={modalAcciones}
                     onClose={() => setModalAcciones(false)}

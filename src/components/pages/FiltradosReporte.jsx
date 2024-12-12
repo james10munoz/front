@@ -137,7 +137,7 @@ const FiltradosReporte = () => {
   return (
     <div className="flex flex-col items-center mt-24 justify-center">
       <Header title="Reporte de Mascotas en Adopción" />
-      <div className="w-full max-w-4xl bg-white shadow-lg rounded-lg p-8 mt-16">
+      <div className="w-full max-w-4xl bg-white shadow-lg rounded-lg p-8 mt-16 pl-52">
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
           Generar Reporte de Mascotas en Adopción
         </h2>

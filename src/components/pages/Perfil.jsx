@@ -199,29 +199,30 @@ const PerfilUsuario = () => {
             </div>
           </div>
           {perfil.rol === 'usuario' && (
-          <div className="absolute bottom-20 right-0 mr-4 flex flex-col items-center">
-          <Button
-            radius="full"
-            className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg h-24 w-24 flex items-center justify-center"
-            onClick={handleRequestRoleChange}
-            css={{
-              borderRadius: "50%", // Hace el botón completamente redondeado
-              '&:hover': {
-                backgroundColor: '#f59e0b', // Color al hacer hover
-              },
-            }}
-          >
-            Click Aquí
-          </Button>
-          <p className="text-lg font-medium text-gray-700 text-center mt-4">
-            <span className='block'>Esta opción te</span>
-            <span className='block'>permite solicitar un</span>
-            <span className='block'>cambio de rol superior</span>
-              
-          </p>
-        </div>
-        
-        )}
+  <div className="fixed bottom-4 right-4 md:bottom-10 md:right-10 flex flex-col items-center">
+    <Button
+      radius="full"
+      className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg 
+                 h-16 w-16 md:h-24 md:w-24 flex items-center justify-center 
+                 transition-transform transform hover:scale-110"
+      onClick={handleRequestRoleChange}
+      css={{
+        borderRadius: "50%", // Hace el botón completamente redondeado
+        "&:hover": {
+          backgroundColor: "#f59e0b", // Color al hacer hover
+        },
+      }}
+    >
+      Click Aquí
+    </Button>
+    <p className="text-sm md:text-lg font-medium text-gray-700 text-center mt-2 md:mt-4">
+      <span className="block">Esta opción te</span>
+      <span className="block">permite solicitar un</span>
+      <span className="block">cambio de rol superior</span>
+    </p>
+  </div>
+)}
+
         </div>
       )}
   
